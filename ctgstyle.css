@@ -1,0 +1,165 @@
+#ctgslider{
+width:800px;
+height:200px;
+z-index:0;
+position:relative;
+top:0px;
+left:0px;
+background-color:#333333;
+}
+
+#ctgslider img {
+position:absolute;
+top:0px;
+left:0px;
+}
+#ctgslider a {
+border:0;
+display:block;
+}
+
+#ctgslider2{
+width:800px;
+height:200px;
+z-index:0;
+position:relative;
+top:100px;
+left:0px;
+background-color:#333333;
+}
+
+#ctgslider2 img {
+position:absolute;
+top:0px;
+left:0px;
+}
+#ctgslider2 a {
+border:0;
+display:block;
+}
+
+.Caption{
+font-family: 'Quando', serif;
+z-index:2;
+width:300px;
+position:relative;
+left:350px;
+font-size:38px;
+top:70px;
+color:#000000;
+display:none;
+}
+
+.CaptionWhite{
+font-family: 'Quando', serif;
+color:#fff;  
+}
+
+/*Required*/
+#MiniButtons{
+position:absolute;
+top:0px;
+left:630px;
+display:inline-block;
+z-index:10;
+margin:5px;
+cursor:pointer;
+}
+
+/*Since there are two slides in this demo, specify look for the second slider specifically. */
+#ctgslider2 #MiniButtons .MiniBtn{
+background:#ccc;
+height:20px;
+width:30px;
+border-top-left-radius: 8px 8px;
+border-top-right-radius: 8px 8px;
+border-bottom-right-radius: 8px 8px;
+border-bottom-left-radius: 8px 8px;
+
+}
+
+/*Required*/
+.MiniBtn{
+font-family: 'Quando', serif;
+width:30px;
+height:30px;
+position:relative;
+display:inline-block;
+margin:5px;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-o-user-select: none;
+user-select: none;
+text-align:center;
+padding-top:5px;
+padding-bottom:5px;
+cursor:pointer;
+
+}
+
+/*Required*/
+#PrevBtn{
+background: url(images/PrevBtn.png);
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-o-user-select: none;
+user-select: none;
+background-repeat:no-repeat;
+width:30px;
+height:30px;
+position:absolute;
+left:0px;
+top:155px;
+z-index:10;
+float:left;
+cursor:pointer;
+
+}
+/*Required*/
+#PrevBtn:hover{
+background: url(images/PrevBtn.png);
+background-repeat:no-repeat;
+width:30px;
+height:30px;
+position:absolute;
+left: 0px;
+top:155px;
+float:left;
+opacity:0.4;
+filter:alpha(opacity=40); /* For IE8 and earlier */
+
+}
+
+/*Required*/
+#NextBtn{
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-o-user-select: none;
+user-select: none;
+z-index:10;
+background: url(images/NextBtn.png);
+background-repeat:no-repeat;
+width:30px;
+height:30px;
+position:absolute;
+top:155px;
+cursor:pointer;
+}
+/*Required*/
+#NextBtn:hover{
+z-index:22;
+background:#ccc;
+background: url(images/NextBtn.png);
+background-repeat:no-repeat;
+width:30px;
+height:30px;
+position:absolute;
+top:155px;
+opacity:0.4;
+filter:alpha(opacity=40); /* For IE8 and earlier */
+}
+
+
