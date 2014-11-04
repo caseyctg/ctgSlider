@@ -1,4 +1,4 @@
-/*--------------  
+/*--------------	
 Free for use, please keep this information present. 
  This program is used in conjunction with jQuery. It is a free for use "slider" or "carousel" to display multiple images and text in one css div. 
     Copyright (C) 2013  Casey Govero, http://HardWiredMedia.com

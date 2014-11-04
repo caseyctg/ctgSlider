@@ -1,0 +1,116 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww19120\viewh14880\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\b\fs24 \cf0 Copyright 2011 Casey Govero Design \
+Feel free to use this plugin, but do not remove this header.\
+\
+Contact me:\
+http://caseygovero.com or http://hardwiredmedia.com\
+\
+version:\
+ctgslider-1.0\
+
+\b0 \
+
+\b html markup should be something like:\
+
+\b0 <div id="ctgslider">	\
+<img src="images/Slider-1.jpg">\
+<div class='Caption'>Caption 1</div>\
+<img src="images/Slider-2.jpg">\
+<div class='Caption'>Caption 2</div>\
+<img src="images/Slider-3.jpg">\
+<div class='Caption'>Caption 3</div>\
+<img src="images/Slider-4.jpg">\
+<!-- can include span classes within caption to change text color individually-->\
+<div class='Caption'><span class="Caption2">Caption 4</span></div>\
+</div>	\
+\
+\
+
+\b another example of html with usecaptions = N:
+\b0 \
+<div id="ctgslider">	\
+<img src="images/Slider-1.jpg">\
+<img src="images/Slider-2.jpg">\
+<img src="images/Slider-3.jpg">\
+<img src="images/Slider-4.jpg">\
+</div>	\
+\
+\
+
+\b Then your javascript call, within the head tag looks like:\
+
+\b0 <!-- hotlink jQuery -->\
+<script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>\
+<!-- attach stylesheet -->\
+<link rel="stylesheet" type="text/css" href="ctgstyle.css" media="screen" />\
+<!-- attach javascript -->\
+<script type="text/javascript" src="ctgslider.js"></script>\
+\
+
+\b Sample initiation through javascript (jQuery):\
+
+\b0 <!-- Call plugin with timelength parameter -->\
+<script>\
+$().ready(function() \{  \
+ $('#ctgslider').ctgslider(\{\
+	'timelength':4000, \
+ 	'showbuttons': 'Y',\
+ 	'minibuttons':'Y', \
+ 	'minibuttonopacity': .65, \
+ 	'centerbuttons': 'Y', \
+ 	'alignrightnextbutton' : 'Y',\
+	'btnoffset':5 ,\
+	'effects':'fast',\
+	'captioneffects':'explode',\
+	'captionclass':'.Caption', \
+	'usenumbers':'Y',\
+	'minibtnimagesrc':'images/star.png',\
+	'usecaptions':'Y'\
+	\}); \
+\});  \
+</script>\
+\
+
+\b Options are as follows:\
+
+\b0 timelength = milliseconds between slides\
+\
+showbuttons = Y or N : If N the mini buttons, next and previous buttons are all removed\
+\
+minibuttons = Y or N : If N the mini buttons get removed, but the next and previous buttons remain unless specified by showbuttons.\
+the positioning for mini buttons is determined by CSS. \
+\
+minibuttonopacity = 0 - 1 : the highlighted slide's mini button opacity. 1 is 100% opacity, 0 is 0% opacity\
+\
+centerbuttons = Y or N : vertically center the next and previous buttons or don't.\
+\
+alignrightnextbutton = Y or N : Y right aligns the Next Button to the right side of the slider. N sets the next button 5 px away from the previous button.\
+\
+btnoffset = Number in pixels. Offest of buttons from the left edge and from the right edge.  \
+		\
+effects = The effect to be used. Possible values: 'blind', 'clip', 'drop', 'explode', 'fold', 'puff', 'slide', 'scale', 'size', 'pulsate'.  Must Have jQuery UI included. \
+\
+captioneffects = type of effect to apply the caption divs. Possible values: 'blind', 'clip', 'drop', 'explode', 'fold', 'puff', 'slide', 'scale', 'size', 'pulsate'.  Must Have jQuery UI included. \
+\
+captionclass = The class to apply the caption effects to. The code requires a caption div to be present (for now). If you don't specify a caption class it will default to '.Caption'.\
+\
+usenumbers = Y or N : whether or not the mini buttons use a number, or displays a graphic. \
+\
+minibtnimagesrc = The url location of an image to use for the css background image. Note that your css has to set the div size to match your image size. (.MiniBtn);\
+\
+usecaptions = Y or N: whether or not to use captions in your html code. If N, you don't have to include a caption div, just img's. \
+\
+
+\b If using for wordpress:\
+
+\b0 set a post category to slider and apply that category to your posts. Your post title becomes the caption, and your body should include the img src. \
+the slider php file is included, wp-slider.php. Just copy that to your main template folder root. \
+\
+<?php include (TEMPLATEPATH . '/wp-slider.php'); ?>\
+\
+}
