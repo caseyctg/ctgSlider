@@ -7,7 +7,7 @@
 <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
 <link rel="stylesheet" type="text/css" href="ctgstyle.css" media="screen" />
-<script type="text/javascript" src="ctgslider.min.js"></script>
+<script type="text/javascript" src="ctgslider.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Quando' rel='stylesheet' type='text/css'>
 <script>
 $().ready(function() {  
@@ -19,12 +19,10 @@ $().ready(function() {
  	'centerbuttons': 'Y', 
  	'alignrightnextbutton' : 'Y',
 	'btnoffset':5 ,
-	'effects':'clip',
-	'captioneffects':'explode',
-	'captionclass':'.Caption', 
+	'effects':'slow',
+	'repeatclass':'.repeat', 
 	'usenumbers':'Y',
-	'minibtnimagesrc':'images/circle.png',
-	'usecaptions':'Y'
+	'minibtnimagesrc':'images/circle.png'
 	}); 
 	
  $('#ctgslider2').ctgslider({
@@ -36,7 +34,6 @@ $().ready(function() {
 	'alignrightnextbutton' : 'Y', 
 	'btnoffset':15 ,
 	'effects': 'fold',
-	'usecaptions':'N'
 	}); 
  
 });  
@@ -46,21 +43,17 @@ $().ready(function() {
 <body>
 
 <div id="ctgslider">	
-<img src="images/Slider-1.jpg">
-<div class='Caption'>Caption 1</div>
-<img src="images/Slider-2.jpg">
-<div class='Caption'></div>
-<img src="images/Slider-3.jpg">
-<div class='Caption'>Caption 3</div>
-<img src="images/Slider-4.jpg">
-<div class='Caption'><span class="CaptionWhite">Caption 4</span></div>
+    <div class="repeat"><div class="Caption">Caption 1</div><img src="images/Slider-1.jpg"></div>
+    <div class="repeat"><div class="Caption">Caption 2</div><img src="images/Slider-2.jpg"></div>
+    <div class="repeat"><div class="Caption">Caption 3</div><img src="images/Slider-3.jpg"></div>
+    <div class="repeat"><div class="Caption">Caption 4</div><img src="images/Slider-4.jpg"></div>
 </div>	
 
-<div id="ctgslider2">	
-<img src="images/Slider-1.jpg">
-<img src="images/Slider-2.jpg">
-<img src="images/Slider-3.jpg">
-<img src="images/Slider-4.jpg">
+<div id="ctgslider2" style="margin-top:20px;">	
+    <img src="images/Slider-1.jpg">
+    <img src="images/Slider-2.jpg">
+    <img src="images/Slider-3.jpg">
+    <img src="images/Slider-4.jpg">
 </div>	
 
 </body>
