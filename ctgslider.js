@@ -30,12 +30,10 @@ $.fn.ctgslider = function(options) {
 	  'centerbuttons' : 'Y',
 	  'alignrightnextbutton' : 'Y',
 	  'btnoffset': -6,
-	  'effects': 'slow',
-	  'captioneffects':'slow',
-	  'captionclass':'.Caption',
+	  'effects': 'slow',	 
+	  'repeatclass':'img',
 	  'usenumbers':'Y',
-	  'minibtnimagesrc':'images/star.png',
-	  'usecaptions':'Y'
+	  'minibtnimagesrc':'images/star.png'
     }, options);  
     
 return this.each(function() { 
@@ -48,22 +46,20 @@ if (typeof options.centerbuttons === "undefined" || options.centerbuttons===null
 if (typeof options.alignrightnextbutton === "undefined" || options.alignrightnextbutton ===null) options.alignrightnextbutton = 'Y';
 if (typeof options.btnoffset === "undefined" || options.btnoffset ===null) options.btnoffset = 0;
 if (typeof options.effects === "undefined" || options.effects ===null) options.effects = 'slow';
-if (typeof options.captioneffects === "undefined" || options.captioneffects ===null) options.captioneffects = 'slow';
-if (typeof options.captionclass === "undefined" || options.captionclass ===null) options.captionclass = '.Caption';
+if (typeof options.repeatclass === "undefined" || options.repeatclass ===null) options.repeatclass = 'img';
 if (typeof options.usenumbers === "undefined" || options.usenumbers ===null) options.usenumbers = 'Y';
 if (typeof options.minibtnimagesrc === "undefined" || options.minibtnimagesrc ===null) options.minibtnimagesrc = 'Y';
-if (typeof options.usecaptions === "undefined" || options.usecaptions ===null) options.usecaptions = 'Y';
 
 var selectorclass = jQuery(this);
 
-var imagelength = selectorclass.find("img").length;
+var imagelength = selectorclass.find(options.repeatclass).length;
 
 InitHide();				
 StartTimer();
 
 var int;
 var counter=0;
-var SlideNum = selectorclass.find("img").length;
+var SlideNum = selectorclass.find(options.repeatclass).length;
 var countersubtractone;
 	
 function StartTimer(){
@@ -75,24 +71,17 @@ function ResetTimer(){
 }
 
 function InitHide(){
-	var SlideNum = selectorclass.find("img").length;
+	var SlideNum = selectorclass.find(options.repeatclass).length;
 
 	//Hide images and captions greater than slides		  
 	//jQuery(selectorclass+':gt(0)').hide();
-	selectorclass.find("img:gt(0)").hide();
-	if(options.usecaptions == 'Y'){
-		selectorclass.find(options.captionclass+":gt(0)").hide();	
-		//Unhide the first slide, I have the css set to display:none; so it hides all slides upon loading. 
-		selectorclass.find(".Caption:lt(1)").css("display", "block");
-	}
+	selectorclass.find(options.repeatclass+":gt(0)").hide();
+	
 	if(options.showbuttons == 'Y'){
-			if(options.usecaptions == 'Y'){
+			
 				//Add Buttons
-				selectorclass.find(options.captionclass+":last-child").after('<div id=\"PrevBtn\"></div><div id=\"NextBtn\"></div>');
-			}else{
-				//Add Buttons
-				selectorclass.find("img:last-child").after('<div id=\"PrevBtn\"></div><div id=\"NextBtn\"></div>');
-			}
+				selectorclass.find(options.repeatclass+":last-child").after('<div id=\"PrevBtn\"></div><div id=\"NextBtn\"></div>');
+			
 				//attach functions to buttons.
 				selectorclass.find('#PrevBtn').bind('click', PrevPicture);
 				selectorclass.find('#NextBtn').bind('click', NextPicture);
@@ -104,7 +93,6 @@ function InitHide(){
 				var SliderW = selectorclass.width();
 				var SliderW2 = SliderW - PrevBtnW;
 				var BtnHeight = selectorclass.find('#PrevBtn').css('top');
-			
 				var PrevBtnH2 = SliderH/2 - PrevBtnH/2;
 				
 				selectorclass.find('#PrevBtn').css('backgroundPosition',"left center");
@@ -121,6 +109,23 @@ function InitHide(){
 				//sets right Next Button to Right Edge
 				selectorclass.find('#NextBtn').css("left",SliderW2-options.btnoffset);
 				selectorclass.find('#PrevBtn').css("left",options.btnoffset);
+                
+                $( window ).resize(function() {
+                    //position buttons and center vertically. 
+                    var PrevBtnH = selectorclass.find('#PrevBtn').height();
+                    var PrevBtnW = selectorclass.find('#PrevBtn').width();
+                    var SliderH = selectorclass.height();
+                    var SliderW = selectorclass.width();
+                    var SliderW2 = SliderW - PrevBtnW;
+                    var BtnHeight = selectorclass.find('#PrevBtn').css('top');
+                    var PrevBtnH2 = SliderH/2 - PrevBtnH/2;
+                    
+                    //sets right Next Button to Right Edge
+                    selectorclass.find('#NextBtn').css("left",SliderW2-options.btnoffset);
+                    selectorclass.find('#PrevBtn').css("left",options.btnoffset);
+                });
+                
+                    
 			}else{
 				selectorclass.find('#NextBtn').css("left",PrevBtnW+10);
 			}
@@ -130,17 +135,17 @@ function InitHide(){
 		if(options.showbuttons == 'Y'){
 			selectorclass.find("#NextBtn:last-child").after('<div id=\"MiniButtons\"><div class=\"MiniInner\"></div></div>');
 		}else{
-			selectorclass.find("img:last-child").after('<div id=\"MiniButtons\"><div class=\"MiniInner\"></div></div>');
+			selectorclass.find(options.repeatclass+":last-child").after('<div id=\"MiniButtons\"><div class=\"MiniInner\"></div></div>');
 		}
 	if(options.usenumbers == 'Y'){
 		var i = parseInt(SlideNum)+1;
-		selectorclass.find("img").each(function(){
+		selectorclass.find(options.repeatclass).each(function(){
 			i--;
 			selectorclass.find('.MiniInner').after("<div class=\"MiniBtn\">"+i+"</div>");	
 		});
 	}else{
 		
-		selectorclass.find("img").each(function(){
+		selectorclass.find(options.repeatclass).each(function(){
 			selectorclass.find('.MiniInner').after("<div class=\"MiniBtn\"></div>");	
 		});
 		
@@ -170,18 +175,11 @@ function NextPicture(){
 		countersubtractone = counter-1;
 		
 		//Fade out the previous slide
-		selectorclass.find("img:eq("+countersubtractone+")").hide();
+		selectorclass.find(options.repeatclass+":eq("+countersubtractone+")").hide();
 			
 		//Fade in the next slide
-		selectorclass.find("img:eq("+counter+")").show(options.effects);
+		selectorclass.find(options.repeatclass+":eq("+counter+")").show(options.effects);
 		
-		if(options.usecaptions == 'Y'){		
-			//Hide Previous Caption
-			selectorclass.find(options.captionclass+":eq("+countersubtractone+")").hide();
-			
-			//Show Next caption
-			selectorclass.find(options.captionclass+":eq("+counter+")").show(options.captioneffects);
-		}
 		
 		if(options.minibuttons == 'Y'){
 			selectorclass.find('.MiniBtn:eq('+counter+')').animate({opacity: 1 });
@@ -193,11 +191,7 @@ function NextPicture(){
 		if(parseFloat(counter)==parseFloat(SlideNum) ){
 			
 			counter=0;
-			selectorclass.find("img:eq(0)").show(options.effects);
-			
-			if(options.usecaptions == 'Y'){
-				selectorclass.find(options.captionclass+":eq(0)").show(options.captioneffects);
-			}
+			selectorclass.find(options.repeatclass+":eq(0)").show(options.effects);
 			
 			if(options.minibuttons == 'Y'){
 				selectorclass.find('.MiniBtn:eq('+counter+')').animate({opacity: 1 });
@@ -222,18 +216,10 @@ function PrevPicture(){
 		}
 		
 		//Fade out the previous slide
-		selectorclass.find('img:eq('+countersubtractone+')').hide();	
+		selectorclass.find(options.repeatclass+':eq('+countersubtractone+')').hide();	
 		
 		//Fade in the next slide
-		selectorclass.find('img:eq('+counter+')').show(options.effects);	
-		
-		if(options.usecaptions == 'Y'){
-			//Hide Previous Caption
-			selectorclass.find(options.captionclass+':eq('+countersubtractone+')').hide();	
-			
-			//Show Next caption
-			selectorclass.find(options.captionclass+':eq('+counter+')').show(options.captioneffects);	
-		}
+		selectorclass.find(options.repeatclass+':eq('+counter+')').show(options.effects);	
 		
 		if(options.minibuttons == 'Y'){
 			selectorclass.find('.MiniBtn:eq('+counter+')').animate({opacity: 1 });
@@ -244,12 +230,9 @@ function PrevPicture(){
 		//If We reach the slide end, reset to the first slide. 
 		if(counter==SlideNum){
 			counter=0;
-			selectorclass.find('img:eq(0)').show(options.effects);
+			selectorclass.find(options.repeatclass+':eq(0)').show(options.effects);
 			
-			if(options.usecaptions == 'Y'){
-				selectorclass.find(options.captionclass+':eq(0)').show(options.captioneffects);
-			}
-			
+
 			if(options.minibuttons == 'Y'){
 				selectorclass.find('.MiniBtn:eq('+counter+')').animate({opacity: 1 });
 				selectorclass.find('.MiniBtn:gt('+counter+')').animate({opacity: options.minibuttonopacity});
@@ -270,17 +253,11 @@ function MiniBtnClicker() {
 				//Variable for tracking which mini button is clicked.								  
 				var selectedIndex = jQuery(this).index()-1;
 				//fade out all images which are not clicked, fade in mini button clicked number
-				selectorclass.find('img:lt('+selectedIndex+')').hide();
-				selectorclass.find('img:gt('+selectedIndex+')').hide();		
-				selectorclass.find('img:eq('+selectedIndex+')').show(options.effects);	
+				selectorclass.find(options.repeatclass+':lt('+selectedIndex+')').hide();
+				selectorclass.find(options.repeatclass+':gt('+selectedIndex+')').hide();		
+				selectorclass.find(options.repeatclass+':eq('+selectedIndex+')').show(options.effects);	
 				selectorclass.find('.MiniBtn img').show(options.effects);	
 				
-				if(options.usecaptions == 'Y'){
-					//fade out all captions which are not clicked, fade in mini button clicked number
-					selectorclass.find(options.captionclass+':lt('+selectedIndex+')').hide();	
-					selectorclass.find(options.captionclass+':gt('+selectedIndex+')').hide();	
-					selectorclass.find(options.captionclass+':eq('+selectedIndex+')').show(options.captioneffects);	
-				}
 				//differentiate clicked minibutton by making it opaque
 				selectorclass.find('.MiniBtn:eq('+selectedIndex+')').animate({opacity: 1 });
 				selectorclass.find('.MiniBtn:gt('+selectedIndex+')').animate({opacity: options.minibuttonopacity});
@@ -292,10 +269,10 @@ function MiniBtnClicker() {
 				//Reset timer so it doesn't stutter move while being clicked. 		
 				ResetTimer();
 				StartTimer();	
-		
-		}//END mini btn clicker
+}//END mini btn clicker
+    
 
- });  // End each function
+});  // End each function
 
 };//END ctgslider
 

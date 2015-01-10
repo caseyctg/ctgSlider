@@ -1,5 +1,5 @@
-#ctgslider{
-width:800px;
+#ctgslider, #ctgslider2{
+width:100%;
 height:200px;
 z-index:0;
 position:relative;
@@ -8,31 +8,18 @@ left:0px;
 background-color:#333333;
 }
 
-#ctgslider img {
+#ctgslider img, #ctgslider2 img {
 position:absolute;
 top:0px;
 left:0px;
+width:100%;
+min-height:200px;
 }
 #ctgslider a {
 border:0;
 display:block;
 }
 
-#ctgslider2{
-width:800px;
-height:200px;
-z-index:0;
-position:relative;
-top:100px;
-left:0px;
-background-color:#333333;
-}
-
-#ctgslider2 img {
-position:absolute;
-top:0px;
-left:0px;
-}
 #ctgslider2 a {
 border:0;
 display:block;
