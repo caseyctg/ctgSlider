@@ -54,6 +54,7 @@ var selectorclass = jQuery(this);
 
 var imagelength = selectorclass.find(options.repeatclass).length;
 
+    
 InitHide();				
 StartTimer();
 
@@ -69,6 +70,13 @@ function StartTimer(){
 function ResetTimer(){
 	window.clearInterval(int);
 }
+    
+$(selectorclass).mouseenter(function() {
+   ResetTimer();
+  })
+  .mouseleave(function() {
+    StartTimer();
+});
 
 function InitHide(){
 	var SlideNum = selectorclass.find(options.repeatclass).length;
@@ -90,6 +98,7 @@ function InitHide(){
 				var PrevBtnH = selectorclass.find('#PrevBtn').height();
 				var PrevBtnW = selectorclass.find('#PrevBtn').width();
 				var SliderH = selectorclass.height();
+                var SliderHInit = selectorclass.height();
 				var SliderW = selectorclass.width();
 				var SliderW2 = SliderW - PrevBtnW;
 				var BtnHeight = selectorclass.find('#PrevBtn').css('top');
@@ -97,6 +106,10 @@ function InitHide(){
 				
 				selectorclass.find('#PrevBtn').css('backgroundPosition',"left center");
 				selectorclass.find('#NextBtn').css('backgroundPosition',"left center");
+        
+                var miniBtn = selectorclass.find('#MiniButtons');
+                var miniBtnWidth = SliderW - miniBtn.width();
+                selectorclass.find('#MiniButtons').css("left",miniBtnWidth-options.btnoffset);
 				
 			if(options.centerbuttons == 'Y'){
 				selectorclass.find('#PrevBtn').css("top",PrevBtnH2);
@@ -114,6 +127,7 @@ function InitHide(){
                     //position buttons and center vertically. 
                     var PrevBtnH = selectorclass.find('#PrevBtn').height();
                     var PrevBtnW = selectorclass.find('#PrevBtn').width();
+                    var SliderImgHeight = selectorclass.find(options.repeatclass).find("img").height();
                     var SliderH = selectorclass.height();
                     var SliderW = selectorclass.width();
                     var SliderW2 = SliderW - PrevBtnW;
@@ -123,6 +137,18 @@ function InitHide(){
                     //sets right Next Button to Right Edge
                     selectorclass.find('#NextBtn').css("left",SliderW2-options.btnoffset);
                     selectorclass.find('#PrevBtn').css("left",options.btnoffset);
+                    
+                    if(SliderImgHeight > SliderH){
+                        selectorclass.height(SliderImgHeight);
+                    }else{
+                         //selectorclass.height(SliderHInit);
+                        selectorclass.height(SliderImgHeight);
+                    }
+                    
+                    var miniBtn = selectorclass.find('#MiniButtons');
+                    var miniBtnWidth = SliderW - miniBtn.width();
+                    selectorclass.find('#MiniButtons').css("left",miniBtnWidth-options.btnoffset);
+                    console.log(SliderH+":"+SliderImgHeight);
                 });
                 
                     
@@ -180,7 +206,6 @@ function NextPicture(){
 		//Fade in the next slide
 		selectorclass.find(options.repeatclass+":eq("+counter+")").show(options.effects);
 		
-		
 		if(options.minibuttons == 'Y'){
 			selectorclass.find('.MiniBtn:eq('+counter+')').animate({opacity: 1 });
 			selectorclass.find('.MiniBtn:gt('+counter+')').animate({opacity: options.minibuttonopacity});
@@ -215,6 +240,8 @@ function PrevPicture(){
 			countersubtractone = counter+1;		
 		}
 		
+    
+    
 		//Fade out the previous slide
 		selectorclass.find(options.repeatclass+':eq('+countersubtractone+')').hide();	
 		
