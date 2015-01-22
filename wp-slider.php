@@ -1,5 +1,5 @@
 <!-- 
-Set a category of posts to slider and put an image in the content.
+Set a category of posts to slider and put an image in the featured image.
 -->
 <div id="ctgslider">	
       <?php 
